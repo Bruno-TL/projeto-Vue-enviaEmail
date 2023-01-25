@@ -27,6 +27,8 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script>
+import axios from 'axios';
+
 export default {
     name: "TelaInicial",
     props: ['titleLabel'],
