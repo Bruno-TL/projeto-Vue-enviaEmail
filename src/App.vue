@@ -2,18 +2,20 @@
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <TelaInicial titleLabel="Digite o seu e-mail e recebe uma mensagem."/>
+    <Counter/>
   </div>
 </template>
 
 <script>
 import TelaInicial from './components/TelaInicial.vue';
-
+import Counter from './components/Counter.vue';
 
 
 export default {
   name: 'App',
   components: {
-    TelaInicial
+    TelaInicial,
+    Counter
 }
 }
 </script>

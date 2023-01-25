@@ -10,7 +10,7 @@
                 rounded-2
         ">
             <!-- action="https://vuejs.org/" -->
-            <form id="app" class="col align-items-center" @submit="checkForm" method="post">
+            <form id="app" class="col align-items-center" @submit.prevent="checkForm()" method="post">
                 <div class="mb-3">
                     <label for="email" class="form-label h2">{{ titleLabel }}</label>
                     <input type="email" class="form-control" id="email" v-model="email" placeholder="name@example.com">
@@ -28,34 +28,41 @@
 
 <script>
 import axios from 'axios';
+import { mapGetters, mapActions } from "vuex";
 
 export default {
     name: "TelaInicial",
     props: ['titleLabel'],
-    data() {
+    data(){
         return {
-            info: '',
-            email: '',
-            errors: ''
+            email:''
         }
     },
+    computed:({
+        ... mapGetters([
+            'info',
+            'errors'
+        ]
+        )
+    }),
     methods: {
-        checkForm: function (e) {
-            e.preventDefault()
-
-            if (!this.email) {
-                this.errors = 'Email inválido';
-            }
-
-            if (!this.email.includes("@") || !this.email.includes(".")) {
-                this.errors = 'Email inválido';
-            }
-            axios
-                .post('http://127.0.0.1:8000/api/email', {
-                    email: this.email
-                })
-                .then(response => (this.info = response.data))
-        }
+       checkForm() {
+        this.$store.dispatch('api',this.email)
+       }
     }
 }
 </script>
+
+<style >
+.div-1 {
+    height: 100vh;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    background-color: #ffbc40;
+}
+
+.div-2 {
+    background-color: #fff;
+}
+</style>
